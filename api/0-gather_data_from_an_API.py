@@ -27,16 +27,16 @@ def completed_tasks(tasks):
 
     for item in tasks:
         if item.get("completed"):
-            completed_tasks.append(task)
+            completed_tasks.append(item)
     return completed_tasks
 
 
 def print_report(employee_name, tasks_completed, tasks_total):
     """ Displays report of tasks by employee ID """
     print("Employee {} is done with tasks({}/{}):"
-          .format(employee_name, len(tasks_completed), len(total_tasks)))
-    for item in completed_tasks:
-        print("t/ {}".format(task.get("title")))
+          .format(employee_name, len(tasks_completed), len(tasks_total)))
+    for item in tasks_completed:
+        print("t/ {}".format(item.get("title")))
 
 
 if __name__ == "__main__":
