@@ -1,47 +1,47 @@
 #!/usr/bin/python3
-""" Task 0 - Gather data from API """
+""" Task 0 """
 
 import requests
 import sys
 
 
-def employee_tasks(ID):
-    """ Returns all tasks of an employee """
+def get_employee_tasks(employeeId):
+    """ Returns all tasks associated with an employee """
     url = "https://jsonplaceholder.typicode.com/"
-    url += "users/{}/todos".format(ID)
+    url += "users/{}/todos".format(employeeId)
     response = requests.get(url)
     return response.json()
 
 
-def employee_name(ID):
-    """ Returns name of employee """
+def get_employee_name(employeeId):
+    """ Returns employee name from specific ID """
     url = "https://jsonplaceholder.typicode.com/"
-    url += "users/{}".format(ID)
+    url += "users/{}".format(employeeId)
     response = requests.get(url)
     return response.json().get("name")
 
 
-def completed_tasks(tasks):
-    """ Returns completed tasks """
+def get_completed_tasks(tasks):
+    """ Returns all completed tasks """
     completed_tasks = []
 
-    for item in tasks:
-        if item.get("completed"):
-            completed_tasks.append(item)
+    for task in tasks:
+        if task.get("completed"):
+            completed_tasks.append(task)
     return completed_tasks
 
 
-def print_report(employee_name, tasks_completed, tasks_total):
-    """ Displays report of tasks by employee ID """
+def print_employee_tasks(employeeName, completedTasks, totalTasks):
+    """ Prints all tasks by employee ID """
     print("Employee {} is done with tasks({}/{}):"
-          .format(employee_name, len(tasks_completed), len(tasks_total)))
-    for item in tasks_completed:
-        print("t/ {}".format(item.get("title")))
+          .format(employeeName, len(completedTasks), totalTasks))
+    for task in completedTasks:
+        print("\t {}".format(task.get("title")))
 
 
 if __name__ == "__main__":
-    ID = sys.argv[1]
-    tasks = employee_tasks(ID)
-    employee_name = employee_name(ID)
-    completed_tasks = tasks_completed(tasks)
-    print_report(employee_name, completed_tasks, len(tasks))
+    employeeId = sys.argv[1]
+    tasks = get_employee_tasks(employeeId)
+    employeeName = get_employee_name(employeeId)
+    completedTasks = get_completed_tasks(tasks)
+    print_employee_tasks(employeeName, completedTasks, len(tasks))
