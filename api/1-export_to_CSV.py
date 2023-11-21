@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """ Task 1 """
 
+import csv
 import requests
 import sys
-import csv
 
 
 def employee_tasks(employeeId):
