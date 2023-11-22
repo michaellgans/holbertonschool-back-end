@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-""" Task 1 """
-
+""" Task 2 """
 import csv
 import json
 import requests
@@ -33,15 +32,16 @@ def print_employee_tasks(employeeName, completedTasks, totalTasks):
 
 
 def export_to_json(employeeId, employeeName, completedTasks):
-    data_dictionary = {str(employeeId): []}
+    """ Exports data to a json file """
+    data_dict = {str(employeeId): []}
 
-    for tasks in completedTasks:
-        task_dictionary = {"task": task.get("title"),
-                           "completed": task.get("completed"),
-                           "username": employeeName}
-        data_dictionary[str(employeeId)].append(task_dictionary)
+    for task in completedTasks:
+        task_dict = {"task": task.get("title"),
+                     "completed": task.get("completed"),
+                     "username": employeeName}
+        data_dict[str(employeeId)].append(task_dict)
 
-    json_data = json.dumps(data_dictionary)
+    json_data = json.dumps(data_dict)
 
     filename = "{}.json".format(employeeId)
     with open(filename, "w") as jsonfile:
