@@ -39,11 +39,11 @@ def print_report(employeeName, completedTasks, totalTasks):
     for task in completedTasks:
         print("\t {}".format(task.get("title")))
 
-    with open("{}.csv".format(eployeeID), "w") as csvfile:
-        bytes_written = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
-        for item in tasks:
-            bytes_written.writerow([employeeID, employeeName,
-                                    task.get("completed"), task.get("title")])
+    with open("{}.csv".format(employeeId), "w") as csvfile:
+        writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
+        for task in tasks:
+            writer.writerow([employeeId, employeeName,
+                             task.get("completed"), task.get("title")])
 
 
 if __name__ == "__main__":
